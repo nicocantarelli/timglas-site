@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timglas — local-first time tracking for macOS</title>
+<meta name="description" content="Timglas is a privacy-focused, local-first time tracking app for macOS. In development.">
+<meta property="og:title" content="Timglas">
+<meta property="og:description" content="Local-first time tracking for macOS.">
+<style>
+  /* Commit Mono is self-hosted: place the woff2 (or otf) from the downloaded
+     zip into /fonts and adjust the filename below to match the zip's contents
+     (e.g. CommitMono-400-Regular.woff2 or CommitMonoV143-Regular.otf). */
+  @font-face {
+    font-family: 'Commit Mono';
+    src: url('/fonts/CommitMono-400-Regular.woff2') format('woff2'),
+         url('/fonts/CommitMono-400-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Switzer';
+    src: url('/fonts/Switzer-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Switzer';
+    src: url('/fonts/Switzer-Semibold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+  :root {
+    --bg: #0E0E0E;
+    --ink: #F5F5F3;
+    --dim: #6E6E6B;
+    --hair: #262624;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    main { animation: none; }
+  }
+  .mark {
+    width: 26px;
+    height: 26px;
+    fill: var(--ink);
+    margin-bottom: 2.25rem;
+  }
+  h1 {
+    font-weight: 600;
+    font-size: clamp(3rem, 9vw, 4.75rem);
+    letter-spacing: -0.035em;
+    line-height: 1;
+    text-transform: lowercase;
+  }
+  .tagline {
+    margin-top: 1.1rem;
+    font-weight: 500;
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+    color: var(--dim);
+    letter-spacing: -0.01em;
+  }
+  .clock {
+    margin-top: 3.25rem;
+    font-family: 'Commit Mono', monospace;
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    color: var(--dim);
+    font-variant-numeric: tabular-nums;
+  }
+  .rule {
+    width: 44px;
+    height: 1px;
+    background: var(--hair);
+    margin: 2.25rem 0;
+  }
+  .links {
+    font-family: 'Commit Mono', monospace;
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+  }
+  .links a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--dim);
+    padding-bottom: 2px;
+    transition: border-color 0.2s ease;
+  }
+  .links a:hover { border-color: var(--ink); }
+  .links a:focus-visible {
+    outline: 1px solid var(--ink);
+    outline-offset: 4px;
+    border-bottom-color: transparent;
+  }
+  footer {
+    position: fixed;
+    bottom: 1.5rem;
+    font-family: 'Commit Mono', monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    color: var(--dim);
+  }
+</style>
+</head>
+<body>
+  <main>
+    <svg class="mark" viewBox="0 0 24 24" role="img" aria-label="Timglas mark">
+      <path d="M4 3 H20 L12 12 Z" />
+      <path d="M12 12 L20 21 H4 Z" />
+    </svg>
+    <h1>timglas</h1>
+    <p class="tagline">Local-first time tracking for macOS.</p>
+    <p class="clock" id="clock" aria-hidden="true">00:00:00</p>
+    <div class="rule" aria-hidden="true"></div>
+    <p class="links"><a href="https://github.com/nicocantarelli/timglas">github.com/nicocantarelli/timglas</a></p>
+  </main>
+  <footer>in development · macOS 14+</footer>
+  <script>
+    const clock = document.getElementById('clock');
+    function tick() {
+      const d = new Date();
+      clock.textContent = [d.getHours(), d.getMinutes(), d.getSeconds()]
+        .map(n => String(n).padStart(2, '0')).join(':');
+    }
+    tick();
+    setInterval(tick, 1000);
+  </script>
+</body>
+</html>
