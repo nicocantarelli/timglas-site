@@ -123,7 +123,16 @@
 
   /* ---------- image ---------- */
   figure.full { margin: 0; }
-  figure.full img { width: 100%; height: auto; display: block; }
+  /* Same treatment as the caustics: knocked back and masked at both edges so it
+     dissolves into the background instead of sitting in a hard-edged band. */
+  figure.full img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0.7;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+  }
 
   /* ---------- sections ---------- */
   section { padding: 5.5rem 0; border-top: 1px solid var(--hair); }
