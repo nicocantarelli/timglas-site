@@ -1,12 +1,12 @@
 # timglas.app
 
-Placeholder site for **[Timglas](https://github.com/nicocantarelli/timglas)** — a local-first, menu-bar time tracker for macOS. Live at [timglas.app](https://timglas.app).
+Site for **[Timglas](https://github.com/nicocantarelli/timglas)** — a local-first, menu-bar time tracker for macOS. Live at [timglas.app](https://timglas.app).
 
 Designed and built by Nicolas Cantarelli.
 
 ## What it is
 
-One static HTML file. Dark canvas, the two-triangle hourglass mark, the wordmark in Switzer, a live clock ticking local time in Commit Mono, and a link to the repo. Nothing else.
+One static HTML file. A full-height dark hero — the two-triangle hourglass mark, the wordmark in Switzer, a live clock ticking local time in Commit Mono — then a full-bleed hourglass photograph and five sections: the premise, what the app does, where the data lives, how it sits in macOS, and status.
 
 - **Zero external requests** — both typefaces are self-hosted woff2 (Switzer Medium/Semibold, Commit Mono Regular converted from OTF); no analytics, no third-party scripts
 - **No build step, no framework** — the page is the deployable artifact
@@ -18,6 +18,7 @@ One static HTML file. Dark canvas, the two-triangle hourglass mark, the wordmark
 ```
 timglas-site/
 ├── index.html               # The entire site
+├── images/hourglass.webp    # Full-bleed brand image
 ├── favicon.svg / .png       # Hourglass mark
 ├── apple-touch-icon.png
 ├── fonts/                   # Self-hosted woff2

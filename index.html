@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Timglas — local-first time tracking for macOS</title>
-<meta name="description" content="Timglas is a privacy-focused, local-first time tracking app for macOS. In development.">
+<title>Timglas · local-first time tracking for macOS</title>
+<meta name="description" content="Timglas is a local-first, menu-bar-first time tracker for macOS. No account, no cloud, no telemetry. Built around how people actually track time. In development.">
 <meta property="og:title" content="Timglas">
-<meta property="og:description" content="Local-first time tracking for macOS.">
+<meta property="og:description" content="Local-first time tracking for macOS. Built around imperfect days.">
+<meta property="og:image" content="https://timglas.app/images/hourglass.webp">
+<meta property="og:url" content="https://timglas.app">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <style>
-  /* Commit Mono is self-hosted: place the woff2 (or otf) from the downloaded
-     zip into /fonts and adjust the filename below to match the zip's contents
-     (e.g. CommitMono-400-Regular.woff2 or CommitMonoV143-Regular.otf). */
   @font-face {
     font-family: 'Commit Mono';
     src: url('/fonts/CommitMono-400-Regular.woff2') format('woff2');
@@ -40,99 +40,149 @@
     --ink: #F5F5F3;
     --dim: #6E6E6B;
     --hair: #262624;
+    --mono: 'Commit Mono', ui-monospace, monospace;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { height: 100%; }
   body {
     background: var(--bg);
     color: var(--ink);
     font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ---------- hero ---------- */
+  .hero {
+    min-height: 92vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
-    padding: 2.25rem;
-    -webkit-font-smoothing: antialiased;
-  }
-  main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     text-align: center;
+    padding: 2rem 1.5rem;
     animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
   @keyframes rise {
     from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-  @media (prefers-reduced-motion: reduce) {
-    main { animation: none; }
-  }
-  .mark {
-    width: 34px;
-    height: 34px;
-    fill: var(--ink);
-    margin-bottom: 2.7rem;
-  }
+  @media (prefers-reduced-motion: reduce) { .hero { animation: none; } }
+  .mark { width: 26px; height: 26px; fill: var(--ink); margin-bottom: 2.25rem; }
   h1 {
     font-weight: 600;
-    font-size: clamp(3.5rem, 10.5vw, 5.75rem);
+    font-size: clamp(3rem, 9vw, 4.75rem);
     letter-spacing: -0.035em;
     line-height: 1;
     text-transform: lowercase;
   }
   .tagline {
-    margin-top: 1.35rem;
+    margin-top: 1.1rem;
     font-weight: 500;
-    font-size: clamp(1.125rem, 2.9vw, 1.375rem);
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
     color: var(--dim);
     letter-spacing: -0.01em;
   }
   .clock {
-    margin-top: 3.9rem;
-    font-family: 'Commit Mono', monospace;
-    font-size: 0.9375rem;
+    margin-top: 3.25rem;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
     letter-spacing: 0.08em;
     color: var(--dim);
     font-variant-numeric: tabular-nums;
   }
-  .rule {
-    width: 52px;
-    height: 1px;
-    background: var(--hair);
-    margin: 2.7rem 0;
+  .scrollhint {
+    margin-top: 2.25rem;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    color: var(--dim);
   }
-  .links {
-    font-family: 'Commit Mono', monospace;
-    font-size: 0.9375rem;
+
+  /* ---------- image ---------- */
+  figure.full { margin: 0; }
+  figure.full img { width: 100%; height: auto; display: block; }
+
+  /* ---------- sections ---------- */
+  section { padding: 5.5rem 0; border-top: 1px solid var(--hair); }
+  .label {
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 1.75rem;
+  }
+  .lede {
+    font-weight: 500;
+    font-size: clamp(1.35rem, 3.6vw, 1.75rem);
+    letter-spacing: -0.02em;
+    line-height: 1.35;
+  }
+  .prose { margin-top: 1.25rem; color: var(--dim); max-width: 56ch; }
+  .prose p + p { margin-top: 1rem; }
+  .prose strong { color: var(--ink); font-weight: 500; }
+
+  /* ---------- feature list ---------- */
+  .feat { list-style: none; margin-top: 0.5rem; }
+  .feat li {
+    padding: 1.4rem 0;
+    border-bottom: 1px solid var(--hair);
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    gap: 1.5rem;
+    align-items: baseline;
+  }
+  .feat li:last-child { border-bottom: none; }
+  .feat h3 {
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
+  }
+  .feat p { color: var(--dim); font-size: 0.95rem; }
+  @media (max-width: 600px) {
+    .feat li { grid-template-columns: 1fr; gap: 0.35rem; }
+  }
+
+  /* ---------- principles ---------- */
+  .plist { list-style: none; margin-top: 0.5rem; font-family: var(--mono); font-size: 0.8125rem; letter-spacing: 0.04em; }
+  .plist li { padding: 0.85rem 0; border-bottom: 1px solid var(--hair); display: flex; justify-content: space-between; gap: 1rem; }
+  .plist li:last-child { border-bottom: none; }
+  .plist .no { color: var(--dim); }
+
+  /* ---------- cta ---------- */
+  .cta { text-align: center; }
+  .cta .links {
+    margin-top: 2rem;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
     letter-spacing: 0.04em;
   }
-  .links a {
+  .cta a {
     color: var(--ink);
     text-decoration: none;
     border-bottom: 1px solid var(--dim);
-    padding-bottom: 3px;
+    padding-bottom: 2px;
     transition: border-color 0.2s ease;
   }
-  .links a:hover { border-color: var(--ink); }
-  .links a:focus-visible {
-    outline: 1px solid var(--ink);
-    outline-offset: 4px;
-    border-bottom-color: transparent;
-  }
+  .cta a:hover { border-color: var(--ink); }
+  .cta a:focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; border-bottom-color: transparent; }
+
   footer {
-    position: fixed;
-    bottom: 1.75rem;
-    font-family: 'Commit Mono', monospace;
-    font-size: 0.8125rem;
+    padding: 3rem 1.5rem 2.5rem;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
     letter-spacing: 0.06em;
     color: var(--dim);
+    border-top: 1px solid var(--hair);
   }
 </style>
 </head>
 <body>
-  <main>
+<main>
+
+  <div class="hero">
     <svg class="mark" viewBox="0 0 24 24" role="img" aria-label="Timglas mark">
       <path d="M4 3 H20 L12 12 Z" />
       <path d="M12 12 L20 21 H4 Z" />
@@ -140,10 +190,98 @@
     <h1>timglas</h1>
     <p class="tagline">Local-first time tracking for macOS.</p>
     <p class="clock" id="clock" aria-hidden="true">00:00:00</p>
-    <div class="rule" aria-hidden="true"></div>
-    <p class="links"><a href="https://github.com/nicocantarelli/timglas">github.com/nicocantarelli/timglas</a></p>
-  </main>
-  <footer>in development · macOS 14+</footer>
+    <p class="scrollhint" aria-hidden="true">&darr;</p>
+  </div>
+
+  <figure class="full">
+    <img src="/images/hourglass.webp" alt="An hourglass in darkness, its glass edges traced by warm light" width="2400" height="1504" loading="lazy" decoding="async">
+  </figure>
+
+  <section>
+    <div class="wrap">
+      <p class="label">Premise</p>
+      <p class="lede">Nobody tracks time perfectly. Timglas is built for the days you get wrong.</p>
+      <div class="prose">
+        <p>You forget to start the timer. You leave it running through lunch. You work at 23:00 and finish after midnight, take a call you never log, and remember on Friday that Tuesday happened at all.</p>
+        <p>Most trackers assume none of that. They record a tidy version of your day, and you stop trusting the totals, and totals you do not trust never make it onto an invoice.</p>
+        <p>Timglas assumes the opposite. <strong>Getting it wrong is normal. Fixing it should be cheap.</strong> Backfill time you never recorded. Resolve idle stretches after the fact. Split an entry that turned out to be two things. Label the gaps. The numbers stay ones you would bill from.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="label">What it does</p>
+      <ul class="feat">
+        <li>
+          <h3>Lives in the menu bar</h3>
+          <p>Start, stop, pause and switch from the top of the screen, or from a global hotkey without touching the app at all. A full window exists when you want the whole picture.</p>
+        </li>
+        <li>
+          <h3>Tracks on its own, on your terms</h3>
+          <p>Rules match the app in front, a window title, a URL, a time of day. Suggestions surface instead of taking over, and a manual timer is never overridden by an automatic one.</p>
+        </li>
+        <li>
+          <h3>Handles the away time</h3>
+          <p>Step away and Timglas notices. When you come back it asks what the absence was: keep it, drop it, or assign it somewhere, instead of guessing on your behalf.</p>
+        </li>
+        <li>
+          <h3>Projects, rates and revenue</h3>
+          <p>Group work into projects with hourly rates, and reports turn tracked time into money owed. Timelines show the day as it actually happened, gaps included.</p>
+        </li>
+        <li>
+          <h3>Pomodoro, if you want it</h3>
+          <p>A focus rhythm layered over the running timer, not a separate mode you have to live inside.</p>
+        </li>
+        <li>
+          <h3>Leaves with you</h3>
+          <p>CSV, JSON, iCalendar and PDF out. CSV back in. Your history exits in shapes other tools accept, because local-first data that cannot leave is just a worse cloud.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="label">Where your data lives</p>
+      <p class="lede">On your Mac. That is the whole architecture.</p>
+      <div class="prose">
+        <p>Your work history is a readable JSON file on your own disk, backed up daily on a rotation. If the file is ever damaged, Timglas quarantines it and tells you, rather than silently starting over.</p>
+        <p>Automatic tracking reads only what a rule actually needs. A rule that matches an application never reads a window title. Nothing is sent anywhere, because there is nowhere to send it.</p>
+      </div>
+      <ul class="plist" aria-label="What Timglas does not have">
+        <li><span>Account</span><span class="no">none</span></li>
+        <li><span>Cloud</span><span class="no">none</span></li>
+        <li><span>Analytics</span><span class="no">none</span></li>
+        <li><span>Telemetry</span><span class="no">none</span></li>
+        <li><span>Third-party code</span><span class="no">none</span></li>
+        <li><span>Subscription</span><span class="no">none</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="label">Part of the system</p>
+      <div class="prose" style="margin-top:0">
+        <p>Native Swift and SwiftUI, macOS 14 and up, with no third-party dependencies. Start and stop from <strong>Shortcuts and Siri</strong>. Search past work from <strong>Spotlight</strong>. Link into it from anywhere with <strong>timglas://</strong>. Launch at login, notifications when you want them, silence when you do not.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <p class="label">Status</p>
+      <p class="lede">In development. Built in the open.</p>
+      <p class="links">
+        <a href="https://github.com/nicocantarelli/timglas" target="_blank" rel="noopener">Follow on GitHub</a>
+      </p>
+    </div>
+  </section>
+
+</main>
+  <footer>timglas · macOS 14+ · by <a href="https://nicocantarelli.com" style="color:inherit">Nicolas Cantarelli</a></footer>
+
   <script>
     const clock = document.getElementById('clock');
     function tick() {
