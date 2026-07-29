@@ -232,6 +232,53 @@
     .notify button { text-align: left; }
   }
 
+  /* ---------- notify modal ---------- */
+  .notify-open {
+    margin-top: 2.5rem;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    background: transparent;
+    color: var(--ink);
+    border: none;
+    border-bottom: 1px solid var(--dim);
+    padding-bottom: 0.35rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+  }
+  .notify-open:hover { border-bottom-color: var(--ink); }
+  .notify-open:focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; }
+
+  .notify-modal {
+    /* The `*` reset kills the UA `margin: auto` that centres an open dialog. */
+    margin: auto;
+    width: min(26rem, calc(100vw - 3rem));
+    padding: 2.75rem 2rem 2rem;
+    background: #141413;
+    color: var(--ink);
+    border: 1px solid var(--hair);
+    text-align: center;
+  }
+  .notify-modal::backdrop { background: rgba(8, 8, 8, 0.78); }
+  .notify-modal .notify { margin-top: 0; }
+  .notify-modal .notify-note { margin-bottom: 0; }
+  .notify-close {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.75rem;
+    background: transparent;
+    border: none;
+    color: var(--dim);
+    font-family: var(--mono);
+    font-size: 1.125rem;
+    line-height: 1;
+    padding: 0.35rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  .notify-close:hover { color: var(--ink); }
+  .notify-close:focus-visible { outline: 1px solid var(--ink); outline-offset: 2px; }
+
   .sr-only {
     position: absolute;
     width: 1px;
@@ -266,6 +313,7 @@
     <h1>timglas</h1>
     <p class="tagline">Local-first time tracking for macOS.</p>
     <p class="clock" id="clock" aria-hidden="true">00:00:00</p>
+    <button class="notify-open" type="button" data-notify-open>Notify me when it ships</button>
     <p class="scrollhint" aria-hidden="true">&darr;</p>
   </div>
 
@@ -376,6 +424,23 @@
 </main>
   <footer>timglas · macOS 14+ · by <a href="https://nicocantarelli.com" style="color:inherit">Nicolas Cantarelli</a></footer>
 
+  <dialog class="notify-modal" id="notify-modal" aria-label="Get notified when Timglas ships">
+    <form method="dialog">
+      <button class="notify-close" aria-label="Close">&times;</button>
+    </form>
+    <form class="notify"
+          action="https://buttondown.email/api/emails/embed-subscribe/timglas"
+          method="post"
+          target="_blank"
+          data-notify-form>
+      <label class="sr-only" for="notify-email-modal">Email address</label>
+      <input id="notify-email-modal" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+      <input type="hidden" name="tag" value="timglas.app">
+      <button type="submit">Notify me</button>
+    </form>
+    <p class="notify-note">One email when it ships. Nothing else.</p>
+  </dialog>
+
   <script>
     const clock = document.getElementById('clock');
     function tick() {
@@ -385,6 +450,16 @@
     }
     tick();
     setInterval(tick, 1000);
+
+    const modal = document.getElementById('notify-modal');
+    document.querySelectorAll('[data-notify-open]').forEach(button => {
+      button.addEventListener('click', () => modal.showModal());
+    });
+    // Clicks land on the dialog element itself only when they hit the backdrop.
+    modal.addEventListener('click', event => {
+      if (event.target === modal) modal.close();
+    });
+    modal.querySelector('[data-notify-form]').addEventListener('submit', () => modal.close());
   </script>
 </body>
 </html>
