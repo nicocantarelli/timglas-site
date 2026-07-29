@@ -18,7 +18,7 @@ One static HTML file. A full-height dark hero — the two-triangle hourglass mar
 ```
 timglas-site/
 ├── index.html               # The entire site
-├── images/hourglass.webp    # Full-bleed brand image
+├── images/                  # Full-bleed hourglass, caustics behind the footer
 ├── favicon.svg / .png       # Hourglass mark
 ├── apple-touch-icon.png
 ├── fonts/                   # Self-hosted woff2

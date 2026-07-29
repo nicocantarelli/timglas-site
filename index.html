@@ -45,13 +45,29 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   /* Everything below is sized in rem, so this one value scales type,
      spacing, rules and column widths together. */
-  html { font-size: 120%; }
+  html { font-size: 120%; background: var(--bg); }
   body {
-    background: var(--bg);
+    position: relative;
     color: var(--ink);
     font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     line-height: 1.6;
+  }
+  /* Caustics behind the status section and the footer. Anchored to the bottom
+     of the document and masked so it fades up out of the flat background. */
+  body::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 44rem;
+    z-index: -1;
+    background: url('/images/tail-caustics.webp') center / cover no-repeat;
+    opacity: 0.22;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 40%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 40%);
+    pointer-events: none;
   }
   .wrap { max-width: 46rem; margin: 0 auto; padding: 0 1.5rem; }
 
