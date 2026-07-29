@@ -114,16 +114,17 @@
   .label {
     font-family: var(--mono);
     font-size: 0.6875rem;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.09em;
     text-transform: uppercase;
     color: var(--dim);
-    margin-bottom: 1.75rem;
+    margin-bottom: 0.9rem;
   }
   .lede {
     font-weight: 500;
     font-size: clamp(1.35rem, 4vw, 1.75rem);
     letter-spacing: -0.02em;
     line-height: 1.35;
+    text-wrap: balance;
   }
   .prose { margin-top: 1.25rem; color: var(--dim); max-width: 56ch; }
   .prose p + p { margin-top: 1rem; }
@@ -206,7 +207,7 @@
   <section>
     <div class="wrap">
       <p class="label">Premise</p>
-      <p class="lede">Nobody tracks time perfectly. Timglas is built for the days you get wrong.</p>
+      <p class="lede">Nobody tracks time perfectly.<br>Timglas is built for the days you get wrong.</p>
       <div class="prose">
         <p>You forget to start the timer. You leave it running through lunch. You work at 23:00 and finish after midnight, take a call you never log, and remember on Friday that Tuesday happened at all.</p>
         <p>Most trackers assume none of that. They record a tidy version of your day, and you stop trusting the totals, and totals you do not trust never make it onto an invoice.</p>
@@ -250,7 +251,7 @@
   <section>
     <div class="wrap">
       <p class="label">Where your data lives</p>
-      <p class="lede">On your Mac. That is the whole architecture.</p>
+      <p class="lede">On your Mac.<br>That is the whole architecture.</p>
       <div class="prose">
         <p>Your work history is a readable JSON file on your own disk, backed up daily on a rotation. If the file is ever damaged, Timglas quarantines it and tells you, rather than silently starting over.</p>
         <p>Automatic tracking reads only what a rule actually needs. A rule that matches an application never reads a window title. Nothing is sent anywhere, because there is nowhere to send it.</p>
@@ -278,7 +279,7 @@
   <section class="cta">
     <div class="wrap">
       <p class="label">Status</p>
-      <p class="lede">In development. Built in the open.</p>
+      <p class="lede">In development.<br>Built in the open.</p>
       <p class="links">
         <a href="https://github.com/nicocantarelli/timglas" target="_blank" rel="noopener">Follow on GitHub</a>
       </p>
