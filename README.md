@@ -8,7 +8,7 @@ Designed and built by Nicolas Cantarelli.
 
 One static HTML file. A full-height dark hero — the two-triangle hourglass mark, the wordmark in Switzer, a live clock ticking local time in Commit Mono — then a full-bleed hourglass photograph and five sections: the premise, what the app does, where the data lives, how it sits in macOS, and status.
 
-- **Zero external requests** — both typefaces are self-hosted woff2 (Switzer Medium/Semibold, Commit Mono Regular converted from OTF); no analytics, no third-party scripts
+- **Zero external requests on load** — both typefaces are self-hosted woff2 (Switzer Medium/Semibold, Commit Mono Regular converted from OTF); no analytics, no third-party scripts. The notify form is a plain HTML `POST` to Buttondown, so nothing third-party is fetched until someone actually submits
 - **No build step, no framework** — the page is the deployable artifact
 - **Adaptive favicon** — the hourglass mark as SVG (dark glyph on light tabs, light on dark) with PNG fallback and a dark-tile `apple-touch-icon`
 - **Reduced-motion aware** — the entrance animation respects `prefers-reduced-motion`
