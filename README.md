@@ -6,7 +6,7 @@ Designed and built by Nicolas Cantarelli.
 
 ## What it is
 
-One static HTML file. A full-height dark hero — the two-triangle hourglass mark, the wordmark in Switzer, a live clock ticking local time in Commit Mono — then a full-bleed hourglass photograph and five sections: the premise, what the app does, where the data lives, how it sits in macOS, and status.
+One static HTML file. A full-viewport hero — an hourglass photographed in near-darkness, with the two-triangle mark, the wordmark in Switzer and a live clock ticking local time in Commit Mono over it — then five sections: the premise, what the app does, where the data lives, how it sits in macOS, and status.
 
 - **Zero external requests** — both typefaces are self-hosted woff2 (Switzer Medium/Semibold, Commit Mono Regular converted from OTF); no analytics, no third-party scripts
 - **No build step, no framework** — the page is the deployable artifact
@@ -18,7 +18,7 @@ One static HTML file. A full-height dark hero — the two-triangle hourglass mar
 ```
 timglas-site/
 ├── index.html               # The entire site
-├── images/hourglass.webp    # Full-bleed brand image
+├── images/hero-hourglass.webp   # Hero photograph
 ├── favicon.svg / .png       # Hourglass mark
 ├── apple-touch-icon.png
 ├── fonts/                   # Self-hosted woff2
