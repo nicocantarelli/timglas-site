@@ -1,0 +1,8 @@
+.git
+.gitignore
+.assetsignore
+.wrangler
+.vercel
+.DS_Store
+README.md
+wrangler.jsonc
