@@ -9,6 +9,9 @@
     "html_handling": "auto-trailing-slash",
     "run_worker_first": ["/subscribe"]
   },
+  "send_email": [
+    { "name": "NOTIFY", "destination_address": "necantarelli@gmail.com" }
+  ],
   "d1_databases": [
     { "binding": "DB", "database_name": "timglas-waitlist", "database_id": "40481a40-568a-40c9-88e2-923ece8f7ca1" }
   ]
