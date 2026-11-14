@@ -1,6 +1,6 @@
 # timglas.app
 
-Site for **[Timglas](https://github.com/nicocantarelli/timglas)** — a local-first, menu-bar time tracker for macOS. Live at [timglas.app](https://timglas.app).
+Site for **[Timglas](https://github.com/nicocantarelli/timglas)** — a local-first, menu-bar time tracker for macOS. Live at [timglas.app](https://timglas.app/?ref=github).
 
 Designed and built by Nicolas Cantarelli.
 
@@ -40,7 +40,7 @@ Deployed on Vercel (project `timglas-site`) as a plain static site — no framew
 vercel deploy --prod
 ```
 
-`timglas.app` and `www.timglas.app` point at the project from Hostinger DNS (`A @ 76.76.21.21`, `CNAME www cname.vercel-dns.com`); www 308-redirects to the apex. The `.app` TLD is HSTS-preloaded, so the site is HTTPS-only by design.
+Hosted on Cloudflare Workers (static assets plus a small Worker for `/subscribe`), deployed from `main` via Workers Builds. DNS is on Cloudflare; `www.timglas.app` 308-redirects to the apex. The `.app` TLD is HSTS-preloaded, so the site is HTTPS-only by design.
 
 ## Typefaces
 
