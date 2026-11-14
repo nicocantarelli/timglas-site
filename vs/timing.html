@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timglas vs Timing · local-first time tracking for macOS</title>
+<meta name="description" content="How Timglas compares with Timing: pricing model, accounts, where your data lives, offline use, platforms, automatic tracking and teams.">
+<meta property="og:title" content="Timglas vs Timing · local-first time tracking for macOS">
+<meta property="og:description" content="How Timglas compares with Timing: pricing model, accounts, where your data lives, offline use, platforms, automatic tracking and teams.">
+<meta property="og:image" content="https://timglas.app/images/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Timglas">
+<meta property="og:url" content="https://timglas.app/vs/timing">
+<link rel="canonical" href="https://timglas.app/vs/timing">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Timglas vs Timing",
+  "url": "https://timglas.app/vs/timing",
+  "about": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Timglas",
+      "operatingSystem": "macOS 14 or later",
+      "applicationCategory": "BusinessApplication",
+      "url": "https://timglas.app/"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Timing",
+      "url": "https://timingapp.com"
+    }
+  ],
+  "dateModified": "2026-11-14"
+}
+</script>
+<style>
+  @font-face {
+    font-family: 'Commit Mono';
+    src: url('/fonts/CommitMono-400-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Switzer';
+    src: url('/fonts/Switzer-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Switzer';
+    src: url('/fonts/Switzer-Semibold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+  :root {
+    --bg: #0E0E0E;
+    --ink: #F5F5F3;
+    --dim: #6E6E6B;
+    --hair: #262624;
+    --mono: 'Commit Mono', ui-monospace, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  /* Everything below is sized in rem, so this one value scales type,
+     spacing, rules and column widths together. */
+  html { font-size: 120%; background: var(--bg); }
+  body {
+    position: relative;
+    color: var(--ink);
+    font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+  /* Caustics behind the status section and the footer. Anchored to the bottom
+     of the document and masked so it fades up out of the flat background. */
+  body::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 44rem;
+    z-index: -1;
+    background: url('/images/tail-caustics.webp') center / cover no-repeat;
+    opacity: 0.22;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 40%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 40%);
+    pointer-events: none;
+  }
+  .wrap { max-width: 46rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ---------- hero ---------- */
+  .hero {
+    /* Exactly one viewport, so the photograph starts at the fold.
+       svh keeps that true on mobile with the browser chrome showing. */
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) { .hero { animation: none; } }
+  .mark { width: 1.625rem; height: 1.625rem; fill: var(--ink); margin-bottom: 2.25rem; }
+  h1 {
+    font-weight: 600;
+    font-size: clamp(3rem, 10vw, 4.75rem);
+    letter-spacing: -0.035em;
+    line-height: 1;
+    text-transform: lowercase;
+  }
+  .tagline {
+    margin-top: 1.1rem;
+    font-weight: 500;
+    font-size: clamp(1rem, 2.8vw, 1.125rem);
+    color: var(--dim);
+    letter-spacing: -0.01em;
+  }
+  .clock {
+    margin-top: 3.25rem;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    color: var(--dim);
+    font-variant-numeric: tabular-nums;
+  }
+  .scrollhint {
+    margin-top: 2.25rem;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    color: var(--dim);
+  }
+
+  /* ---------- image ---------- */
+  figure.full { margin: 0; }
+  /* Same treatment as the caustics: knocked back and masked at both edges so it
+     dissolves into the background instead of sitting in a hard-edged band. */
+  figure.full img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0.7;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+  }
+
+  /* ---------- sections ---------- */
+  section { padding: 5.5rem 0; }
+  .label {
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 0.9rem;
+  }
+  .lede {
+    font-weight: 500;
+    font-size: clamp(1.35rem, 4vw, 1.75rem);
+    letter-spacing: -0.02em;
+    line-height: 1.35;
+    text-wrap: balance;
+  }
+  .prose { margin-top: 1.25rem; color: var(--dim); }
+  .prose p + p { margin-top: 1rem; }
+  .prose strong { color: var(--ink); font-weight: 500; }
+
+  /* ---------- feature list ---------- */
+  .feat { list-style: none; margin-top: 0.5rem; }
+  .feat li {
+    padding: 1.4rem 0;
+    border-bottom: 1px solid var(--hair);
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    gap: 1.5rem;
+    align-items: baseline;
+  }
+  .feat li:last-child { border-bottom: none; }
+  .feat h3 {
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
+  }
+  .feat p { color: var(--dim); font-size: 0.95rem; }
+  @media (max-width: 600px) {
+    .feat li { grid-template-columns: 1fr; gap: 0.35rem; }
+  }
+
+  /* ---------- points ---------- */
+  .points { list-style: none; margin-top: 0.5rem; }
+  .points li {
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--hair);
+    color: var(--dim);
+    font-size: 0.95rem;
+  }
+  .points li:last-child { border-bottom: none; }
+  .points strong { color: var(--ink); font-weight: 500; }
+
+  /* ---------- principles ---------- */
+  .plist { list-style: none; margin-top: 0.5rem; font-family: var(--mono); font-size: 0.8125rem; letter-spacing: 0.04em; }
+  .plist li { padding: 0.85rem 0; border-bottom: 1px solid var(--hair); display: flex; justify-content: space-between; gap: 1rem; }
+  .plist li:last-child { border-bottom: none; }
+  .plist .no { color: var(--dim); }
+
+  /* ---------- cta ---------- */
+  .cta { text-align: center; }
+  .cta .links {
+    margin-top: 2rem;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+  }
+  .cta a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--dim);
+    padding-bottom: 2px;
+    transition: border-color 0.2s ease;
+  }
+  .cta a:hover { border-color: var(--ink); }
+  .cta a:focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; border-bottom-color: transparent; }
+
+  /* ---------- notify ---------- */
+  .notify {
+    margin: 2.25rem auto 0;
+    max-width: 24rem;
+    display: flex;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  .notify input,
+  .notify button {
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    padding: 0.65rem 0;
+    background: transparent;
+    color: var(--ink);
+    border: none;
+    border-bottom: 1px solid var(--hair);
+    transition: border-color 0.2s ease;
+  }
+  .notify input {
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+  }
+  .notify .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+  .notify input::placeholder { color: var(--dim); }
+  .notify input:focus { outline: none; border-bottom-color: var(--ink); }
+  .notify button {
+    border-bottom-color: var(--dim);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .notify button:hover { border-bottom-color: var(--ink); }
+  .notify button:focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; }
+  .notify-note {
+    margin-top: 1.1rem;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    color: var(--dim);
+  }
+  @media (max-width: 480px) {
+    .notify { flex-direction: column; gap: 1.5rem; }
+    .notify button { text-align: left; }
+  }
+
+  /* ---------- notify modal ---------- */
+  .notify-open {
+    margin-top: 2.5rem;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    background: transparent;
+    color: var(--ink);
+    border: none;
+    border-bottom: 1px solid var(--dim);
+    padding-bottom: 0.35rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+  }
+  .notify-open:hover { border-bottom-color: var(--ink); }
+  .notify-open:focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; }
+
+  .notify-modal {
+    /* The `*` reset kills the UA `margin: auto` that centres an open dialog. */
+    margin: auto;
+    width: min(26rem, calc(100vw - 3rem));
+    padding: 2.75rem 2rem 2rem;
+    background: #141413;
+    color: var(--ink);
+    border: 1px solid var(--hair);
+    text-align: center;
+  }
+  .notify-modal::backdrop { background: rgba(8, 8, 8, 0.78); }
+  .notify-modal .notify { margin-top: 0; }
+  .notify-modal .notify-note { margin-bottom: 0; }
+  .notify-close {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.75rem;
+    background: transparent;
+    border: none;
+    color: var(--dim);
+    font-family: var(--mono);
+    font-size: 1.125rem;
+    line-height: 1;
+    padding: 0.35rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  .notify-close:hover { color: var(--ink); }
+  .notify-close:focus-visible { outline: 1px solid var(--ink); outline-offset: 2px; }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  footer {
+    position: relative;
+    padding: 3rem 1.5rem 2.5rem;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    color: var(--dim);
+  }
+  /* A short centred rule instead of a full-width one, sized just past the line below it. */
+  footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(26rem, calc(100% - 3rem));
+    height: 1px;
+    background: var(--hair);
+  }
+
+  /* ---------- compare ---------- */
+  .points a, .crumbs a, footer a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--hair); }
+  .points a:hover, .crumbs a:hover, footer a:hover { border-bottom-color: var(--ink); }
+  .points a { color: var(--ink); }
+  .ctable { width: 100%; border-collapse: collapse; margin-top: 0.5rem; font-size: 0.9rem; }
+  .ctable th, .ctable td { text-align: left; vertical-align: top; padding: 0.85rem 1rem 0.85rem 0; border-bottom: 1px solid var(--hair); }
+  .ctable thead th { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); font-weight: 400; }
+  .ctable tbody th { font-weight: 500; color: var(--ink); width: 30%; }
+  .ctable td { color: var(--dim); }
+  .ctable tr:last-child th, .ctable tr:last-child td { border-bottom: none; }
+  .crumbs { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); }
+  h1.lede { text-transform: none; margin-top: 1rem; }
+  .asof { margin-top: 1.25rem; font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.04em; color: var(--dim); }
+</style>
+</head>
+<body>
+<main>
+  <section>
+    <div class="wrap">
+      <p class="crumbs"><a href="/">timglas</a> / vs Timing</p>
+      <h1 class="lede">Timglas vs Timing.</h1>
+      <div class="prose">
+        <p>Timing is a well-established automatic time tracker for Mac. It records which apps, documents and websites you use and helps you assign that activity to projects. It is sold as a subscription in several editions, with sync and a web app.</p>
+        <p>Timglas is a menu-bar time tracker for one person on a Mac. No account, no cloud, one payment. Everything stays in a file on your disk.</p>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="wrap">
+      <p class="label">Side by side</p>
+      <table class="ctable">
+        <thead><tr><th></th><th>Timglas</th><th>Timing</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Pricing</th><td>One-time purchase. Pay once, no subscription. Price announced at launch.</td><td>Subscription per seat, in Professional, Expert and Connect editions, with a 30-day trial. After cancelling you can view past data but not track new time.</td></tr>
+          <tr><th scope="row">Account</th><td>None. No sign-up, no login.</td><td>Licence activation tied to your subscription.</td></tr>
+          <tr><th scope="row">Where data lives</th><td>A readable JSON file on your Mac, with rotating daily backups.</td><td>On your Mac, with sync between devices and a web app.</td></tr>
+          <tr><th scope="row">Works offline</th><td>Always. There is no server to reach.</td><td>Tracks on your Mac; sync and the web app need a connection.</td></tr>
+          <tr><th scope="row">Platforms</th><td>macOS 14 and later. Mac only.</td><td>Mac, plus a web app. Higher editions add iPhone and iPad Screen Time data.</td></tr>
+          <tr><th scope="row">Automatic tracking</th><td>Optional rules by front app, window title, URL or time of day. Never overrides a timer you started.</td><td>Its core feature: records apps, window titles, documents and sites, then rules sort them into projects.</td></tr>
+          <tr><th scope="row">Teams</th><td>No. Built for one person.</td><td>Yes, in the Connect edition: shared projects and team times in the web app.</td></tr>
+        </tbody>
+      </table>
+      <p class="asof">Compiled November 2026 from public information. Check <a href="https://timingapp.com/pricing" rel="noopener" style="color:inherit">Timing’s pricing page</a> for current plans.</p>
+    </div>
+  </section>
+  <section>
+    <div class="wrap">
+      <p class="label">Which one</p>
+      <ul class="feat">
+        <li><h3>Choose Timing if</h3><p>You want a complete record of everything you do on your Mac, captured in the background, and you are happy to subscribe.</p></li>
+        <li><h3>Choose Timglas if</h3><p>You want a timer you control, automation only where you set a rule, and an app you own outright after one payment.</p></li>
+      </ul>
+    </div>
+  </section>
+  <section class="cta">
+    <div class="wrap">
+      <p class="label">Status</p>
+      <p class="lede">In development.</p>
+      <p class="notify-note"><a href="/">Get one email when it ships →</a></p>
+    </div>
+  </section>
+</main>
+  <footer>timglas · macOS 14+ · by <a href="https://nicocantarelli.com">Nicolas Cantarelli</a> · <a href="/faq">FAQ</a> · <a href="/vs/toggl">vs Toggl</a> · <a href="/vs/timing">vs Timing</a> · <a href="/vs/clockify">vs Clockify</a></footer>
+</body>
+</html>

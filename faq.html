@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Timglas FAQ · local-first time tracking for macOS</title>
-<meta name="description" content="Answers about Timglas, the local-first menu-bar time tracker for macOS: accounts, offline use, where data lives, automatic tracking, exports and billing.">
-<meta property="og:title" content="Timglas FAQ">
-<meta property="og:description" content="Local-first time tracking for macOS. Built around imperfect days.">
+<meta name="description" content="Answers about Timglas, the local-first menu-bar time tracker for macOS: accounts, offline use, where data lives, automatic tracking, exports, billing and pricing.">
+<meta property="og:title" content="Timglas FAQ · local-first time tracking for macOS">
+<meta property="og:description" content="Answers about Timglas, the local-first menu-bar time tracker for macOS: accounts, offline use, where data lives, automatic tracking, exports, billing and pricing.">
 <meta property="og:image" content="https://timglas.app/images/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -132,7 +132,7 @@
       "name": "Does Timglas require a subscription?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No subscription."
+        "text": "No. Timglas will be a one-time purchase: pay once, keep the app. Pricing will be announced at launch."
       }
     }
   ]
@@ -462,14 +462,28 @@
     height: 1px;
     background: var(--hair);
   }
+
+  /* ---------- compare ---------- */
+  .points a, .crumbs a, footer a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--hair); }
+  .points a:hover, .crumbs a:hover, footer a:hover { border-bottom-color: var(--ink); }
+  .points a { color: var(--ink); }
+  .ctable { width: 100%; border-collapse: collapse; margin-top: 0.5rem; font-size: 0.9rem; }
+  .ctable th, .ctable td { text-align: left; vertical-align: top; padding: 0.85rem 1rem 0.85rem 0; border-bottom: 1px solid var(--hair); }
+  .ctable thead th { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); font-weight: 400; }
+  .ctable tbody th { font-weight: 500; color: var(--ink); width: 30%; }
+  .ctable td { color: var(--dim); }
+  .ctable tr:last-child th, .ctable tr:last-child td { border-bottom: none; }
+  .crumbs { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); }
+  h1.lede { text-transform: none; margin-top: 1rem; }
+  .asof { margin-top: 1.25rem; font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.04em; color: var(--dim); }
 </style>
 </head>
 <body>
 <main>
   <section>
     <div class="wrap">
-      <p class="label"><a href="/" style="color:inherit">timglas</a> · FAQ</p>
-      <h1 class="lede" style="text-transform:none">Questions about Timglas.</h1>
+      <p class="crumbs"><a href="/">timglas</a> / FAQ</p>
+      <h1 class="lede">Questions about Timglas.</h1>
       <ul class="feat">
         <li>
           <h3>What is Timglas?</h3>
@@ -525,7 +539,7 @@
         </li>
         <li>
           <h3>Does Timglas require a subscription?</h3>
-          <p>No subscription.</p>
+          <p>No. Timglas will be a one-time purchase: pay once, keep the app. Pricing will be announced at launch.</p>
         </li>
       </ul>
     </div>
@@ -534,10 +548,10 @@
     <div class="wrap">
       <p class="label">Status</p>
       <p class="lede">In development.</p>
-      <p class="notify-note"><a href="/" style="color:inherit">Get one email when it ships →</a></p>
+      <p class="notify-note"><a href="/">Get one email when it ships →</a></p>
     </div>
   </section>
 </main>
-  <footer>timglas · macOS 14+ · by <a href="https://nicocantarelli.com" style="color:inherit">Nicolas Cantarelli</a></footer>
+  <footer>timglas · macOS 14+ · by <a href="https://nicocantarelli.com">Nicolas Cantarelli</a> · <a href="/faq">FAQ</a> · <a href="/vs/toggl">vs Toggl</a> · <a href="/vs/timing">vs Timing</a> · <a href="/vs/clockify">vs Clockify</a></footer>
 </body>
 </html>

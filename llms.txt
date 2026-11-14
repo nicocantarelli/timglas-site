@@ -1,6 +1,6 @@
 # Timglas
 
-> Timglas is a local-first, menu-bar time tracker for macOS (14+), built for freelancers, consultants and independent professionals who bill by the hour. No account, no cloud, no analytics, no telemetry, no subscription. Status: in development; not yet released.
+> Timglas is a local-first, menu-bar time tracker for macOS (14+), built for freelancers, consultants and independent professionals who bill by the hour. No account, no cloud, no analytics, no telemetry, no subscription: a one-time purchase. Status: in development; not yet released.
 
 ## What it does
 - Menu bar timer: start, stop, pause and switch from the menu bar or a global hotkey; full window for the whole picture
@@ -26,4 +26,7 @@
 ## Links
 - [Home](https://timglas.app/)
 - [FAQ](https://timglas.app/faq)
+- [Timglas vs Toggl Track](https://timglas.app/vs/toggl)
+- [Timglas vs Timing](https://timglas.app/vs/timing)
+- [Timglas vs Clockify](https://timglas.app/vs/clockify)
 - [Author](https://nicocantarelli.com)
