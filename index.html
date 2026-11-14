@@ -236,6 +236,7 @@
     min-width: 0;
     text-align: left;
   }
+  .notify .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
   .notify input::placeholder { color: var(--dim); }
   .notify input:focus { outline: none; border-bottom-color: var(--ink); }
   .notify button {
@@ -438,15 +439,15 @@
       <p class="label">Status</p>
       <p class="lede">In development.<br>Built in the open.</p>
 
-      <!-- Buttondown handles the list. Swap the username in the action if the
-           newsletter slug is not "timglas" — a wrong slug fails silently. -->
+      <!-- Posts to /subscribe on the timglas-site Worker (D1 list, Turnstile check). -->
       <form class="notify"
-            action="https://buttondown.com/api/emails/embed-subscribe/timeglas"
-            method="post"
-            target="_blank">
+            action="/subscribe"
+            method="post">
         <label class="sr-only" for="notify-email">Email address</label>
         <input id="notify-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
         <input type="hidden" name="tag" value="timglas.app">
+        <input type="hidden" name="ref">
+        <div class="hp" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
         <button type="submit">Notify me</button>
       </form>
       <p class="notify-note">One email when it ships. Nothing else.</p>
@@ -465,13 +466,14 @@
       <button class="notify-close" aria-label="Close">&times;</button>
     </form>
     <form class="notify"
-          action="https://buttondown.com/api/emails/embed-subscribe/timeglas"
+          action="/subscribe"
           method="post"
-          target="_blank"
           data-notify-form>
       <label class="sr-only" for="notify-email-modal">Email address</label>
       <input id="notify-email-modal" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
       <input type="hidden" name="tag" value="timglas.app">
+        <input type="hidden" name="ref">
+        <div class="hp" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
       <button type="submit">Notify me</button>
     </form>
     <p class="notify-note">One email when it ships. Nothing else.</p>
@@ -495,7 +497,59 @@
     modal.addEventListener('click', event => {
       if (event.target === modal) modal.close();
     });
-    modal.querySelector('[data-notify-form]').addEventListener('submit', () => modal.close());
+
+    // Waitlist: Turnstile loads only once someone focuses a form, so the page
+    // itself still makes no third-party requests.
+    const SITEKEY = '0x4AAAAAAGAbLeZGFnURiutQ';
+    let turnstileScript;
+    const loadTurnstile = () => turnstileScript ||= new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      s.async = true; s.onload = resolve; s.onerror = reject;
+      document.head.append(s);
+    });
+    const ref = new URLSearchParams(location.search).get('ref') || document.referrer || '';
+
+    document.querySelectorAll('form.notify').forEach(form => {
+      form.querySelector('[name=ref]').value = ref;
+      let widget, token, waiting;
+      const nextToken = () => token ? Promise.resolve(token) : (waiting ||= new Promise(resolve => {
+        const done = t => { token = t; waiting = null; resolve(t); };
+        loadTurnstile().then(() => {
+          if (widget === undefined) {
+            const el = document.createElement('div');
+            form.append(el);
+            widget = turnstile.render(el, { sitekey: SITEKEY, callback: t => done(t) });
+          } else {
+            turnstile.reset(widget);
+            const poll = setInterval(() => {
+              const t = turnstile.getResponse(widget);
+              if (t) { clearInterval(poll); done(t); }
+            }, 200);
+          }
+        });
+      }));
+      form.addEventListener('focusin', () => { nextToken(); }, { once: true });
+
+      form.addEventListener('submit', async event => {
+        event.preventDefault();
+        const button = form.querySelector('button[type=submit]');
+        button.disabled = true; button.textContent = 'Sending…';
+        try {
+          const data = new FormData(form);
+          data.set('cf-turnstile-response', await nextToken());
+          token = null;
+          const res = await fetch('/subscribe', { method: 'POST', body: data }).then(r => r.json());
+          if (!res.ok) throw new Error(res.error);
+          const note = document.createElement('p');
+          note.className = 'notify-note';
+          note.textContent = 'You’re on the list. One email when it ships.';
+          form.replaceWith(note);
+        } catch {
+          button.disabled = false; button.textContent = 'Try again';
+        }
+      });
+    });
   </script>
 </body>
 </html>

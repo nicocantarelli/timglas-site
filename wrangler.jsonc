@@ -1,6 +1,15 @@
 {
   "name": "timglas-site",
+  "main": "src/index.js",
   "compatibility_date": "2026-11-13",
   "observability": { "enabled": true },
-  "assets": { "directory": ".", "html_handling": "auto-trailing-slash" }
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": ["/subscribe"]
+  },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "timglas-waitlist", "database_id": "40481a40-568a-40c9-88e2-923ece8f7ca1" }
+  ]
 }
