@@ -543,7 +543,7 @@
           if (!res.ok) throw new Error(res.error);
           const note = document.createElement('p');
           note.className = 'notify-note';
-          note.textContent = 'You’re on the list. One email when it ships.';
+          note.textContent = 'You’re on the list.';
           form.replaceWith(note);
         } catch {
           button.disabled = false; button.textContent = 'Try again';
