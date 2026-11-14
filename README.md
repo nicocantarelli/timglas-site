@@ -1,6 +1,6 @@
 # timglas.app
 
-Site for **[Timglas](https://github.com/nicocantarelli/timglas)** — a local-first, menu-bar time tracker for macOS. Live at [timglas.app](https://timglas.app/?ref=github).
+Site for **Timglas** — a local-first, menu-bar time tracker for macOS. Live at [timglas.app](https://timglas.app/?ref=github).
 
 Designed and built by Nicolas Cantarelli.
 
