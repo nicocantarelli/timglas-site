@@ -1,0 +1,29 @@
+# Timglas
+
+> Timglas is a local-first, menu-bar time tracker for macOS (14+), built for freelancers, consultants and independent professionals who bill by the hour. No account, no cloud, no analytics, no telemetry, no subscription. Status: in development; not yet released.
+
+## What it does
+- Menu bar timer: start, stop, pause and switch from the menu bar or a global hotkey; full window for the whole picture
+- Automatic tracking rules by front app, window title, URL or time of day; suggestions never override a manual timer
+- Idle detection: asks what an absence was (keep, drop or assign) instead of guessing
+- Built for imperfect days: backfill unrecorded time, split entries, label timeline gaps
+- Projects with hourly or fixed-price billing, budgets, billable states and revenue reports
+- Optional Pomodoro rhythm over the running timer
+- Export to CSV, JSON, iCalendar and PDF; import CSV
+- Shortcuts, Siri, Spotlight and timglas:// URL integration
+- Native Swift and SwiftUI, no third-party dependencies
+
+## Privacy and data
+- All data is a readable JSON file on the user's Mac with rotating daily backups
+- Nothing is sent anywhere; works fully offline
+- Rules read only what they need (an app rule never reads window titles)
+
+## Good fit for
+- Freelancers and consultants on macOS who need billable totals they trust
+- People who want a private, offline time tracker with no account
+- People who forget to start or stop timers and need to fix their history cheaply
+
+## Links
+- [Home](https://timglas.app/)
+- [FAQ](https://timglas.app/faq)
+- [Author](https://nicocantarelli.com)

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timglas FAQ · local-first time tracking for macOS</title>
+<meta name="description" content="Answers about Timglas, the local-first menu-bar time tracker for macOS: accounts, offline use, where data lives, automatic tracking, exports and billing.">
+<meta property="og:title" content="Timglas FAQ">
+<meta property="og:description" content="Local-first time tracking for macOS. Built around imperfect days.">
+<meta property="og:image" content="https://timglas.app/images/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Timglas">
+<meta property="og:url" content="https://timglas.app/faq">
+<link rel="canonical" href="https://timglas.app/faq">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Timglas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A time tracker for macOS that lives in the menu bar and keeps all of its data on your Mac. It is built for freelancers, consultants and independent professionals who need totals they can bill from."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Timglas available yet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not yet. It is in development. Leave your email on the home page and you get one email when it ships, nothing else."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Timglas need an account?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. There is no sign-up, no login and no server. You open the app and start tracking."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where is my data stored?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "On your Mac, as a readable JSON file on your own disk, backed up daily on a rotation. If the file is ever damaged, Timglas quarantines it and tells you instead of silently starting over."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work offline?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Timglas has no cloud backend, so there is nothing for it to connect to. It works the same with or without a network."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Timglas collect analytics or telemetry?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The app has no analytics, no telemetry and no third-party code. Nothing is sent anywhere, because there is nowhere to send it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can it track time automatically?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, with rules you set: the app in front, a window title, a URL or a time of day. Suggestions surface instead of taking over, and a timer you started manually is never overridden by an automatic one. A rule that matches an application never reads window titles."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when I forget to start or stop the timer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "That is the case Timglas is built for. You can backfill time you never recorded, resolve idle stretches after you come back, split an entry that turned out to be two things, and label gaps in the timeline."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it good for freelancers who bill by the hour?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Group work into projects with hourly rates, and reports turn tracked time into money owed. Projects can be hourly or fixed-price, with budgets and billable states."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I export my data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. CSV, JSON, iCalendar and PDF out, and CSV back in."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work with Shortcuts, Siri or Spotlight?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Start and stop timers from Shortcuts and Siri, search past work from Spotlight, and link into the app from anywhere with timglas:// URLs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which macOS versions are supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "macOS 14 and later. Timglas is a native Swift and SwiftUI app with no third-party dependencies."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it have a Pomodoro timer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, optionally. It runs as a focus rhythm over the active timer, so you never have to switch into a separate mode."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Timglas require a subscription?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No subscription."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  @font-face {
+    font-family: 'Commit Mono';
+    src: url('/fonts/CommitMono-400-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Switzer';
+    src: url('/fonts/Switzer-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Switzer';
+    src: url('/fonts/Switzer-Semibold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+  :root {
+    --bg: #0E0E0E;
+    --ink: #F5F5F3;
+    --dim: #6E6E6B;
+    --hair: #262624;
+    --mono: 'Commit Mono', ui-monospace, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  /* Everything below is sized in rem, so this one value scales type,
+     spacing, rules and column widths together. */
+  html { font-size: 120%; background: var(--bg); }
+  body {
+    position: relative;
+    color: var(--ink);
+    font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+  /* Caustics behind the status section and the footer. Anchored to the bottom
+     of the document and masked so it fades up out of the flat background. */
+  body::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 44rem;
+    z-index: -1;
+    background: url('/images/tail-caustics.webp') center / cover no-repeat;
+    opacity: 0.22;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 40%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 40%);
+    pointer-events: none;
+  }
+  .wrap { max-width: 46rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ---------- hero ---------- */
+  .hero {
+    /* Exactly one viewport, so the photograph starts at the fold.
+       svh keeps that true on mobile with the browser chrome showing. */
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) { .hero { animation: none; } }
+  .mark { width: 1.625rem; height: 1.625rem; fill: var(--ink); margin-bottom: 2.25rem; }
+  h1 {
+    font-weight: 600;
+    font-size: clamp(3rem, 10vw, 4.75rem);
+    letter-spacing: -0.035em;
+    line-height: 1;
+    text-transform: lowercase;
+  }
+  .tagline {
+    margin-top: 1.1rem;
+    font-weight: 500;
+    font-size: clamp(1rem, 2.8vw, 1.125rem);
+    color: var(--dim);
+    letter-spacing: -0.01em;
+  }
+  .clock {
+    margin-top: 3.25rem;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    color: var(--dim);
+    font-variant-numeric: tabular-nums;
+  }
+  .scrollhint {
+    margin-top: 2.25rem;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    color: var(--dim);
+  }
+
+  /* ---------- image ---------- */
+  figure.full { margin: 0; }
+  /* Same treatment as the caustics: knocked back and masked at both edges so it
+     dissolves into the background instead of sitting in a hard-edged band. */
+  figure.full img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0.7;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+  }
+
+  /* ---------- sections ---------- */
+  section { padding: 5.5rem 0; }
+  .label {
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 0.9rem;
+  }
+  .lede {
+    font-weight: 500;
+    font-size: clamp(1.35rem, 4vw, 1.75rem);
+    letter-spacing: -0.02em;
+    line-height: 1.35;
+    text-wrap: balance;
+  }
+  .prose { margin-top: 1.25rem; color: var(--dim); }
+  .prose p + p { margin-top: 1rem; }
+  .prose strong { color: var(--ink); font-weight: 500; }
+
+  /* ---------- feature list ---------- */
+  .feat { list-style: none; margin-top: 0.5rem; }
+  .feat li {
+    padding: 1.4rem 0;
+    border-bottom: 1px solid var(--hair);
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    gap: 1.5rem;
+    align-items: baseline;
+  }
+  .feat li:last-child { border-bottom: none; }
+  .feat h3 {
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
+  }
+  .feat p { color: var(--dim); font-size: 0.95rem; }
+  @media (max-width: 600px) {
+    .feat li { grid-template-columns: 1fr; gap: 0.35rem; }
+  }
+
+  /* ---------- points ---------- */
+  .points { list-style: none; margin-top: 0.5rem; }
+  .points li {
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--hair);
+    color: var(--dim);
+    font-size: 0.95rem;
+  }
+  .points li:last-child { border-bottom: none; }
+  .points strong { color: var(--ink); font-weight: 500; }
+
+  /* ---------- principles ---------- */
+  .plist { list-style: none; margin-top: 0.5rem; font-family: var(--mono); font-size: 0.8125rem; letter-spacing: 0.04em; }
+  .plist li { padding: 0.85rem 0; border-bottom: 1px solid var(--hair); display: flex; justify-content: space-between; gap: 1rem; }
+  .plist li:last-child { border-bottom: none; }
+  .plist .no { color: var(--dim); }
+
+  /* ---------- cta ---------- */
+  .cta { text-align: center; }
+  .cta .links {
+    margin-top: 2rem;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+  }
+  .cta a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--dim);
+    padding-bottom: 2px;
+    transition: border-color 0.2s ease;
+  }
+  .cta a:hover { border-color: var(--ink); }
+  .cta a:focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; border-bottom-color: transparent; }
+
+  /* ---------- notify ---------- */
+  .notify {
+    margin: 2.25rem auto 0;
+    max-width: 24rem;
+    display: flex;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  .notify input,
+  .notify button {
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    padding: 0.65rem 0;
+    background: transparent;
+    color: var(--ink);
+    border: none;
+    border-bottom: 1px solid var(--hair);
+    transition: border-color 0.2s ease;
+  }
+  .notify input {
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+  }
+  .notify .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+  .notify input::placeholder { color: var(--dim); }
+  .notify input:focus { outline: none; border-bottom-color: var(--ink); }
+  .notify button {
+    border-bottom-color: var(--dim);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .notify button:hover { border-bottom-color: var(--ink); }
+  .notify button:focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; }
+  .notify-note {
+    margin-top: 1.1rem;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    color: var(--dim);
+  }
+  @media (max-width: 480px) {
+    .notify { flex-direction: column; gap: 1.5rem; }
+    .notify button { text-align: left; }
+  }
+
+  /* ---------- notify modal ---------- */
+  .notify-open {
+    margin-top: 2.5rem;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    background: transparent;
+    color: var(--ink);
+    border: none;
+    border-bottom: 1px solid var(--dim);
+    padding-bottom: 0.35rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+  }
+  .notify-open:hover { border-bottom-color: var(--ink); }
+  .notify-open:focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; }
+
+  .notify-modal {
+    /* The `*` reset kills the UA `margin: auto` that centres an open dialog. */
+    margin: auto;
+    width: min(26rem, calc(100vw - 3rem));
+    padding: 2.75rem 2rem 2rem;
+    background: #141413;
+    color: var(--ink);
+    border: 1px solid var(--hair);
+    text-align: center;
+  }
+  .notify-modal::backdrop { background: rgba(8, 8, 8, 0.78); }
+  .notify-modal .notify { margin-top: 0; }
+  .notify-modal .notify-note { margin-bottom: 0; }
+  .notify-close {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.75rem;
+    background: transparent;
+    border: none;
+    color: var(--dim);
+    font-family: var(--mono);
+    font-size: 1.125rem;
+    line-height: 1;
+    padding: 0.35rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  .notify-close:hover { color: var(--ink); }
+  .notify-close:focus-visible { outline: 1px solid var(--ink); outline-offset: 2px; }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  footer {
+    position: relative;
+    padding: 3rem 1.5rem 2.5rem;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    color: var(--dim);
+  }
+  /* A short centred rule instead of a full-width one, sized just past the line below it. */
+  footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(26rem, calc(100% - 3rem));
+    height: 1px;
+    background: var(--hair);
+  }
+</style>
+</head>
+<body>
+<main>
+  <section>
+    <div class="wrap">
+      <p class="label"><a href="/" style="color:inherit">timglas</a> · FAQ</p>
+      <h1 class="lede">Questions about Timglas.</h1>
+      <ul class="feat">
+        <li>
+          <h3>What is Timglas?</h3>
+          <p>A time tracker for macOS that lives in the menu bar and keeps all of its data on your Mac. It is built for freelancers, consultants and independent professionals who need totals they can bill from.</p>
+        </li>
+        <li>
+          <h3>Is Timglas available yet?</h3>
+          <p>Not yet. It is in development. Leave your email on the home page and you get one email when it ships, nothing else.</p>
+        </li>
+        <li>
+          <h3>Does Timglas need an account?</h3>
+          <p>No. There is no sign-up, no login and no server. You open the app and start tracking.</p>
+        </li>
+        <li>
+          <h3>Where is my data stored?</h3>
+          <p>On your Mac, as a readable JSON file on your own disk, backed up daily on a rotation. If the file is ever damaged, Timglas quarantines it and tells you instead of silently starting over.</p>
+        </li>
+        <li>
+          <h3>Does it work offline?</h3>
+          <p>Yes. Timglas has no cloud backend, so there is nothing for it to connect to. It works the same with or without a network.</p>
+        </li>
+        <li>
+          <h3>Does Timglas collect analytics or telemetry?</h3>
+          <p>No. The app has no analytics, no telemetry and no third-party code. Nothing is sent anywhere, because there is nowhere to send it.</p>
+        </li>
+        <li>
+          <h3>Can it track time automatically?</h3>
+          <p>Yes, with rules you set: the app in front, a window title, a URL or a time of day. Suggestions surface instead of taking over, and a timer you started manually is never overridden by an automatic one. A rule that matches an application never reads window titles.</p>
+        </li>
+        <li>
+          <h3>What happens when I forget to start or stop the timer?</h3>
+          <p>That is the case Timglas is built for. You can backfill time you never recorded, resolve idle stretches after you come back, split an entry that turned out to be two things, and label gaps in the timeline.</p>
+        </li>
+        <li>
+          <h3>Is it good for freelancers who bill by the hour?</h3>
+          <p>Yes. Group work into projects with hourly rates, and reports turn tracked time into money owed. Projects can be hourly or fixed-price, with budgets and billable states.</p>
+        </li>
+        <li>
+          <h3>Can I export my data?</h3>
+          <p>Yes. CSV, JSON, iCalendar and PDF out, and CSV back in.</p>
+        </li>
+        <li>
+          <h3>Does it work with Shortcuts, Siri or Spotlight?</h3>
+          <p>Yes. Start and stop timers from Shortcuts and Siri, search past work from Spotlight, and link into the app from anywhere with timglas:// URLs.</p>
+        </li>
+        <li>
+          <h3>Which macOS versions are supported?</h3>
+          <p>macOS 14 and later. Timglas is a native Swift and SwiftUI app with no third-party dependencies.</p>
+        </li>
+        <li>
+          <h3>Does it have a Pomodoro timer?</h3>
+          <p>Yes, optionally. It runs as a focus rhythm over the active timer, so you never have to switch into a separate mode.</p>
+        </li>
+        <li>
+          <h3>Does Timglas require a subscription?</h3>
+          <p>No subscription.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <section class="cta">
+    <div class="wrap">
+      <p class="label">Status</p>
+      <p class="lede">In development.</p>
+      <p class="notify-note"><a href="/" style="color:inherit">Get one email when it ships →</a></p>
+    </div>
+  </section>
+</main>
+  <footer>timglas · macOS 14+ · by <a href="https://nicocantarelli.com" style="color:inherit">Nicolas Cantarelli</a></footer>
+</body>
+</html>

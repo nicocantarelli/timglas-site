@@ -7,12 +7,47 @@
 <meta name="description" content="Timglas is a local-first, menu-bar-first time tracker for macOS. No account, no cloud, no telemetry. Built around how people actually track time. In development.">
 <meta property="og:title" content="Timglas">
 <meta property="og:description" content="Local-first time tracking for macOS. Built around imperfect days.">
-<meta property="og:image" content="https://timglas.app/images/hourglass.webp">
-<meta property="og:url" content="https://timglas.app">
+<meta property="og:image" content="https://timglas.app/images/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Timglas">
+<meta property="og:url" content="https://timglas.app/">
+<link rel="canonical" href="https://timglas.app/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Timglas",
+  "url": "https://timglas.app/",
+  "description": "A local-first, menu-bar time tracker for macOS. No account, no cloud, no telemetry. Built for freelancers, consultants and independent professionals who bill by the hour.",
+  "applicationCategory": "BusinessApplication",
+  "applicationSubCategory": "Time tracking",
+  "operatingSystem": "macOS 14 or later",
+  "featureList": [
+    "Menu bar timer with global hotkey",
+    "Automatic tracking rules by app, window title, URL or time of day",
+    "Idle time detection and resolution",
+    "Backfill, split and label gaps in past time",
+    "Projects, hourly rates and revenue reports",
+    "Optional Pomodoro",
+    "Export to CSV, JSON, iCalendar and PDF",
+    "Shortcuts, Siri and Spotlight integration",
+    "All data stored locally as JSON on your Mac"
+  ],
+  "author": {
+    "@type": "Person",
+    "name": "Nicolas Cantarelli",
+    "url": "https://nicocantarelli.com"
+  },
+  "image": "https://timglas.app/images/og.jpg",
+  "releaseNotes": "In development."
+}
+</script>
 <style>
   @font-face {
     font-family: 'Commit Mono';
@@ -456,7 +491,7 @@
   </section>
 
 </main>
-  <footer>timglas · macOS 14+ · by <a href="https://nicocantarelli.com" style="color:inherit">Nicolas Cantarelli</a></footer>
+  <footer>timglas · macOS 14+ · by <a href="https://nicocantarelli.com" style="color:inherit">Nicolas Cantarelli</a> · <a href="/faq" style="color:inherit">FAQ</a></footer>
 
   <dialog class="notify-modal" id="notify-modal" aria-label="Get notified when Timglas ships">
     <form method="dialog">
